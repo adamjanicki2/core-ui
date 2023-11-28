@@ -4,6 +4,7 @@ import { useTheme, useThemePreference } from "./hooks/useTheme";
 import useWatchScroll from "./hooks/useWatchScroll";
 import useScrollToHash from "./hooks/useScrollToHash";
 import useScrollLock from "./hooks/useScrollLock";
+import useCache from "./hooks/useCache";
 
 import ThemeProvider from "./components/ThemeProvider";
 
@@ -15,5 +16,6 @@ export {
   useWatchScroll,
   useScrollToHash,
   useScrollLock,
+  useCache,
   ThemeProvider,
 };
