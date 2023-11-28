@@ -1,6 +1,6 @@
 {
   "name": "@adamjanicki/core-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Core UI components for all my applications, in TypeScript/React.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
