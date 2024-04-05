@@ -7,8 +7,12 @@ const useScrollToHash = () => {
   useEffect(() => {
     const { hash } = window.location;
     if (hash) {
-      const element = document.querySelector(hash);
-      element?.scrollIntoView();
+      try {
+        const element = document.querySelector(hash);
+        element?.scrollIntoView();
+      } catch {
+        return;
+      }
     }
   }, []);
 };
