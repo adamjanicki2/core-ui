@@ -9,7 +9,7 @@ describe("useCache", () => {
     const value = cache.get("test");
     useEffect(() => {
       if (fill) {
-        cache.set("test", "test", Date.now() + 1000 * 60 * 60);
+        cache.set("test", "test");
       }
     }, [fill, cache.set]);
     return <div data-testid="cache">{value}</div>;

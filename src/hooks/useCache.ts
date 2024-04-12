@@ -9,12 +9,12 @@ type CacheValue<T> = {
   /**
    * The timestamp at which the cache value expires
    */
-  expiresAt: number;
+  expiresAt?: number;
 };
 type Cache<T> = Record<string, CacheValue<T>>;
 type CacheStore<T> = {
   cache: Cache<T>;
-  setCache: (key: string, value: T, expiresAt: number) => void;
+  setCache: (key: string, value: T, expiresAt?: number) => void;
 };
 /**
  * The storage type to use for the cache
@@ -34,7 +34,7 @@ type CacheHook<T> = {
    * @param value the value to set
    * @param expiresAt the timestamp at which the cache value expires
    */
-  set: (key: string, value: T, expiresAt: number) => void;
+  set: CacheStore<T>["setCache"];
 };
 
 /**
@@ -52,7 +52,7 @@ const useCache = <T>(
     persist<CacheStore<T>>(
       (set) => ({
         cache: {},
-        setCache: (key: string, value: T, expiresAt: number) => {
+        setCache: (key, value, expiresAt) => {
           set((state) => ({
             cache: {
               ...state.cache,
@@ -74,7 +74,10 @@ const useCache = <T>(
 
   const get = (key: string): T | undefined => {
     const cacheValue = cache[key];
-    if (cacheValue && cacheValue.expiresAt > Date.now()) {
+    if (
+      cacheValue &&
+      (!cacheValue.expiresAt || cacheValue.expiresAt > Date.now())
+    ) {
       return cacheValue.value;
     }
     return undefined;
